@@ -1,0 +1,13 @@
+1.website
+2.World wide web
+3.Uniform resource locator
+4.HTTP send data as plain text
+  HTTPS scrambles data using encryption
+5.Static website is fixed and stays the exact same for every person who reads it.
+  Dynamic website pulls user data from database.
+6. 1.planning
+   2.designing
+   3.coding
+   4.testing
+   5.launch
+   6.maintenance
