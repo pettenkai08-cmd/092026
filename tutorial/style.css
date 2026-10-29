@@ -1,0 +1,18 @@
+body {
+    background-color: lightyellow;
+    margin: 30px;
+    font-size: 20px;
+}
+
+h1 {
+    color: blue;
+    text-transform: uppercase;
+    text-decoration: underline;
+    letter-spacing: 5px;
+}
+
+p {
+    word-spacing: 5px;
+    border-radius: 15px;
+    text-indent: 30px;
+}
