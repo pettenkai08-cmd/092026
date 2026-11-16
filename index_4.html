@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Kitchen Counter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header and navigation (shown on every screen) -->
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="logo" href="#home"><i></i>Kitchen Counter</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-links">Menu</button>
+      <nav class="links" id="site-links" aria-label="Main">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#shop" data-nav="shop">Shop</a>
+        <a href="#shop" data-nav="products">Products</a>
+        <a href="#about" data-nav="about">About / Contact</a>
+        <button type="button" class="nav-btn" id="logout-btn">Log out</button>
+      </nav>
+      <a class="cartlink" href="#cart" aria-label="Open cart">Cart <span class="badge">0</span></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- 0. LOGIN (first page) -->
+    <section class="view" id="view-login" hidden>
+      <div class="auth">
+        <div class="brand">
+          <span class="dot"></span>
+          <h1>Kitchen Counter</h1>
+          <p class="tagline">Sign in to order pizza, burgers and drinks.</p>
+        </div>
+
+        <div id="login-box">
+          <h2>Welcome back</h2>
+          <p class="subtitle">Enter any username and password to continue.</p>
+
+          <form id="loginForm" novalidate style="margin-top:16px">
+            <div class="field">
+              <label for="username">Username:</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+                <input type="text" id="username" placeholder="Enter your username" autocomplete="username" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="password">Password:</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+                <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+                <button type="button" id="togglePassword" class="toggle-btn">Show</button>
+              </div>
+            </div>
+
+            <p id="formMessage" class="form-message" role="alert"></p>
+            <button type="submit" class="btn login-btn">Login</button>
+          </form>
+        </div>
+
+        <section id="signedInPanel" hidden>
+          <p id="welcomeMessage" class="subtitle"></p>
+          <a class="btn" href="#home">Go to the store</a>
+          <button type="button" class="btn ghost" id="logout-panel">Logout</button>
+        </section>
+      </div>
+    </section>
+
+    <!-- 1. HOME -->
+    <section class="view" id="view-home" hidden>
+      <p id="welcome-banner" class="ok" role="status" hidden></p>
+      <div class="promo">
+        <small>Welcome</small>
+        <h1>Fresh food, simple ordering.</h1>
+        <p>Pizza from the oven, burgers off the grill and cold drinks. Free delivery on orders over $30.</p>
+        <a class="btn" href="#shop" data-filter="All">See the menu</a>
+      </div>
+
+      <div>
+        <div class="sec-head"><h2>Categories</h2></div>
+        <div class="cats">
+          <a class="cat" href="#shop" data-filter="Pizza"><span data-cat-art="Pizza"></span>Pizza</a>
+          <a class="cat" href="#shop" data-filter="Burgers"><span data-cat-art="Burgers"></span>Burgers</a>
+          <a class="cat" href="#shop" data-filter="Drinks"><span data-cat-art="Drinks"></span>Drinks</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-head"><h2>Featured</h2><a href="#shop" data-filter="All">All items</a></div>
+        <div class="grid two" id="featured"></div>
+      </div>
+    </section>
+
+    <!-- 2. SHOP / MENU -->
+    <section class="view" id="view-shop" hidden>
+      <h1>Shop</h1>
+      <div class="shop">
+        <aside class="filters" aria-label="Filters">
+          <h2>Filters</h2>
+          <button type="button" data-filter="All" aria-pressed="true"><span>All</span><span class="muted count"></span></button>
+          <button type="button" data-filter="Pizza" aria-pressed="false"><span>Pizza</span><span class="muted count"></span></button>
+          <button type="button" data-filter="Burgers" aria-pressed="false"><span>Burgers</span><span class="muted count"></span></button>
+          <button type="button" data-filter="Drinks" aria-pressed="false"><span>Drinks</span><span class="muted count"></span></button>
+        </aside>
+        <div class="grid" id="product-grid"></div>
+      </div>
+    </section>
+
+    <!-- 3. PRODUCT DETAILS -->
+    <section class="view" id="view-product" hidden>
+      <div id="product-detail"></div>
+      <div>
+        <div class="sec-head"><h2>Related</h2></div>
+        <div class="grid" id="related-grid"></div>
+      </div>
+    </section>
+
+    <!-- 4. SHOPPING CART -->
+    <section class="view" id="view-cart" hidden>
+      <h1>Cart</h1>
+      <div id="cart-root"></div>
+    </section>
+
+    <!-- 5. CHECKOUT -->
+    <section class="view" id="view-checkout" hidden>
+      <h1>Checkout</h1>
+      <div id="checkout-root"></div>
+    </section>
+
+    <!-- 6. ABOUT / CONTACT -->
+    <section class="view" id="view-about" hidden>
+      <h1>About / Contact</h1>
+      <div class="about-band">Fresh food, simple ordering.</div>
+      <div class="twocol">
+        <div>
+          <h2>Contact</h2>
+          <form id="contact-form" style="margin-top:14px">
+            <label for="m-email">Email<input id="m-email" type="email" autocomplete="email" required></label>
+            <label for="m-msg">Message<textarea id="m-msg" required></textarea></label>
+            <div><button class="btn" type="submit">Send</button></div>
+            <p id="contact-status" class="ok" role="status" hidden></p>
+          </form>
+        </div>
+        <div>
+          <h2>Opening hours</h2>
+          <div class="hours muted">
+            <span>Mon to Fri</span><span>11:00 to 22:00</span>
+            <span>Sat and Sun</span><span>10:00 to 23:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Welcome to My Kitchen Counter! :)</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
